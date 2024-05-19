@@ -150,21 +150,6 @@ namespace CityInfo.API.Controllers
             city.PointOfInterest.Remove(pointOfInterestFromStore);
             return NoContent();
         }
-        public async Task<ActionResult> CreateFile(IFormFile file)
-        {
-            if (file.Length == 0 || file.Length > 20971520 || file.ContentType != "application/pdf")
-            {
-                return BadRequest("No File or an invalid one has inputted.");
-            }
-            var path = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                $"uploaded_file_{Guid.NewGuid()}.pdf");
-
-            using(var stream = new FileStream(path,FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return Ok("Your file has been uploaded successfully.");
-        }
+       
     }
 }
